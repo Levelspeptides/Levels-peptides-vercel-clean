@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const featuredProducts = [
   { name: 'RETATRUTIDE', mg: '10mg', price: '$119' },
@@ -106,8 +106,43 @@ function FeatureBadge({ icon, title, subtitle }) {
 }
 
 export default function App() {
+  const [ageVerified, setAgeVerified] = useState(false)
+  const [riskAccepted, setRiskAccepted] = useState(false)
+
   return (
     <div style={styles.page}>
+      {(!ageVerified || !riskAccepted) && (
+        <div style={styles.modalOverlay}>
+          {!ageVerified ? (
+            <div style={styles.modalCard}>
+              <div style={styles.modalEyebrow}>AGE VERIFICATION</div>
+              <h2 style={styles.modalTitle}>You must be 21+ to enter this site.</h2>
+              <p style={styles.modalText}>
+                By entering, you confirm that you are at least 21 years old and that you understand all products are offered strictly for laboratory research purposes only.
+              </p>
+              <div style={styles.modalButtons}>
+                <button style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 180 }} onClick={() => setAgeVerified(true)}>I AM 21+</button>
+                <button style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }} onClick={() => window.location.href = 'https://www.google.com'}>EXIT SITE</button>
+              </div>
+            </div>
+          ) : (
+            <div style={styles.modalCard}>
+              <div style={styles.modalEyebrow}>RESEARCH AGREEMENT</div>
+              <h2 style={styles.modalTitle}>Assumption of Risk & Liability Waiver</h2>
+              <p style={styles.modalText}>
+                By continuing, you acknowledge that all materials are sold solely for lawful laboratory and research use, not for human consumption, medical use, food use, cosmetic use, or household use. You assume all risk for handling, storage, use, and misuse of products purchased from this site.
+              </p>
+              <p style={styles.modalText}>
+                You agree to release, indemnify, and hold harmless Level Peptides, its owners, affiliates, employees, and agents from any and all claims, losses, liabilities, damages, injuries, costs, or expenses arising from purchase, possession, transport, handling, or use of any product.
+              </p>
+              <div style={styles.modalButtons}>
+                <button style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 220 }} onClick={() => setRiskAccepted(true)}>I AGREE & ENTER</button>
+                <button style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }} onClick={() => window.location.href = 'https://www.google.com'}>DECLINE</button>
+              </div>
+            </div>
+          )}
+        </div>
+      )
       <div style={styles.pageGlowTop} />
       <div style={styles.pageGlowBottom} />
 
@@ -153,6 +188,27 @@ export default function App() {
         <div style={styles.paymentRow}>
           <div style={styles.paymentChip}>ZELLE: levels.peptides.ca@gmail.com</div>
           <div style={styles.paymentChip}>PAYPAL: levels.peptides.ca@gmail.com</div>
+        </div>
+      </section>
+
+      <section id="legal" style={styles.legalSection}>
+        <div style={styles.legalGrid}>
+          <div style={styles.legalCard}>
+            <div style={styles.legalTitle}>Legal Notice</div>
+            <div style={styles.legalText}>All products and content on this site are provided exclusively for laboratory research purposes. Nothing on this website constitutes medical advice, diagnosis, treatment guidance, or a recommendation for human or veterinary use.</div>
+          </div>
+          <div style={styles.legalCard}>
+            <div style={styles.legalTitle}>Assumption of Risk</div>
+            <div style={styles.legalText}>By purchasing, possessing, or using any item from this site, the buyer accepts full responsibility for verifying legality, suitability, safe handling, storage, transport, and use within their jurisdiction and facility.</div>
+          </div>
+          <div style={styles.legalCard}>
+            <div style={styles.legalTitle}>Liability Waiver</div>
+            <div style={styles.legalText}>Buyer agrees to release and hold harmless Level Peptides and its affiliates from any claims or damages resulting from misuse, improper handling, relabeling, resale, unauthorized application, or any use inconsistent with research-only restrictions.</div>
+          </div>
+          <div style={styles.legalCard}>
+            <div style={styles.legalTitle}>Additional Notice</div>
+            <div style={styles.legalText}>All sales are final. No refunds or returns. Products are not intended for human consumption. Customer is responsible for ensuring compliance with all applicable local, state, and federal laws before purchase.</div>
+          </div>
         </div>
       </section>
 
@@ -382,6 +438,17 @@ const styles = {
   paymentTitle: { fontSize: 26, marginBottom: 16, fontWeight: 700 },
   paymentRow: { display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' },
   paymentChip: { padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.03)', fontSize: 16 },
+  legalSection: { padding: '18px 34px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  legalGrid: { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 18 },
+  legalCard: { background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 18, padding: 20 },
+  legalTitle: { fontSize: 20, fontWeight: 800, marginBottom: 10 },
+  legalText: { color: '#d0d0d0', fontSize: 14, lineHeight: 1.6 },
+  modalOverlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, zIndex: 100 },
+  modalCard: { width: 'min(760px, 100%)', background: 'linear-gradient(180deg, #0d0d0d, #050505)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 24, padding: 28, boxShadow: '0 0 40px rgba(255,0,0,0.16)' },
+  modalEyebrow: { color: '#ff1733', fontWeight: 800, fontSize: 12, letterSpacing: 1.2, marginBottom: 10 },
+  modalTitle: { fontSize: 34, margin: '0 0 14px', fontWeight: 800 },
+  modalText: { color: '#d8d8d8', lineHeight: 1.7, fontSize: 16, margin: '0 0 14px' },
+  modalButtons: { display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 14 },
   footer: { textAlign: 'center', padding: '24px 20px 44px', color: '#f0f0f0', fontSize: 22 },
 }
 
