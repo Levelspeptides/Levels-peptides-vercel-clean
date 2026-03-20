@@ -16,7 +16,7 @@ const initialOrders = [
     total: '$127',
     paymentMethod: 'Zelle',
     paymentProof: 'uploaded-proof.png',
-    paymentVerified: false,
+    orderStatus: 'Payment Proof Uploaded',
     shippingStatus: 'Pending',
     trackingNumber: '',
   },
@@ -155,7 +155,6 @@ function AdminPanel({
   setOrders,
   setView,
 }) {
-  const fileInputRef = useRef(null)
   const [newProduct, setNewProduct] = useState({ name: '', mg: '', price: '' })
   const [newOrder, setNewOrder] = useState({
     customer: '',
@@ -166,7 +165,7 @@ function AdminPanel({
   })
 
   const exportCsv = () => {
-    const header = ['Order ID', 'Customer', 'Email', 'Items', 'Total', 'Payment Method', 'Payment Proof', 'Payment Verified', 'Shipping Status', 'Tracking Number']
+    const header = ['Order ID', 'Customer', 'Email', 'Items', 'Total', 'Payment Method', 'Payment Proof', 'Order Status', 'Shipping Status', 'Tracking Number']
     const rows = orders.map((order) => [
       order.id,
       order.customer,
@@ -175,14 +174,15 @@ function AdminPanel({
       order.total,
       order.paymentMethod,
       order.paymentProof || '',
-      order.paymentVerified ? 'Yes' : 'No',
+      order.orderStatus,
       order.shippingStatus,
       order.trackingNumber || '',
     ])
 
     const csv = [header, ...rows]
       .map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(','))
-      .join('\n')
+      .join('
+')
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
@@ -220,7 +220,7 @@ function AdminPanel({
         total: newOrder.total,
         paymentMethod: newOrder.paymentMethod,
         paymentProof: '',
-        paymentVerified: false,
+        orderStatus: 'Pending Review',
         shippingStatus: 'Pending',
         trackingNumber: '',
       },
@@ -231,12 +231,6 @@ function AdminPanel({
 
   const updateOrder = (id, patch) => {
     setOrders(orders.map((order) => (order.id === id ? { ...order, ...patch } : order)))
-  }
-
-  const attachProof = (event) => {
-    const file = event.target.files?.[0]
-    if (!file || !orders.length) return
-    updateOrder(orders[0].id, { paymentProof: file.name })
   }
 
   return (
@@ -296,8 +290,8 @@ function AdminPanel({
         </div>
 
         <div style={styles.panelCardWide}>
-          <div style={styles.panelTitle}>Manual Checkout Orders</div>
-          <div style={styles.panelText}>Create manual orders, store payment proof file names, verify payment, update shipping status, and enter tracking numbers.</div>
+          <div style={styles.panelTitle}>Manual Payment Orders</div>
+          <div style={styles.panelText}>Manage manual Zelle and PayPal orders with review states, payment proof logging, payment confirmation, and shipping updates.</div>
           <div style={styles.formGrid}>
             <input style={styles.input} placeholder="Customer" value={newOrder.customer} onChange={(e) => setNewOrder({ ...newOrder, customer: e.target.value })} />
             <input style={styles.input} placeholder="Email" value={newOrder.email} onChange={(e) => setNewOrder({ ...newOrder, email: e.target.value })} />
@@ -310,8 +304,6 @@ function AdminPanel({
               <option>PayPal</option>
             </select>
             <button style={styles.primaryAdminButton} onClick={addManualOrder}>Create Manual Order</button>
-            <button style={styles.secondaryAdminButton} onClick={() => fileInputRef.current?.click()}>Attach Payment Proof</button>
-            <input ref={fileInputRef} type="file" style={{ display: 'none' }} onChange={attachProof} />
           </div>
 
           <div style={styles.ordersTable}>
@@ -323,7 +315,19 @@ function AdminPanel({
                   <div style={styles.orderMeta}>Payment proof: {order.paymentProof || 'none uploaded'}</div>
                 </div>
                 <div style={styles.orderControls}>
-                  <button style={styles.smallButton} onClick={() => updateOrder(order.id, { paymentVerified: !order.paymentVerified })}>{order.paymentVerified ? 'Verified' : 'Verify Payment'}</button>
+                  <select style={{ ...styles.input, width: 190 }} value={order.orderStatus} onChange={(e) => updateOrder(order.id, { orderStatus: e.target.value })}>
+                    <option>Pending Review</option>
+                    <option>Payment Proof Uploaded</option>
+                    <option>Awaiting Confirmation</option>
+                    <option>Mark Paid</option>
+                    <option>Request Info</option>
+                  </select>
+                  <input
+                    style={{ ...styles.input, width: 180 }}
+                    placeholder="Payment proof file"
+                    value={order.paymentProof}
+                    onChange={(e) => updateOrder(order.id, { paymentProof: e.target.value })}
+                  />
                   <select style={{ ...styles.input, width: 140 }} value={order.shippingStatus} onChange={(e) => updateOrder(order.id, { shippingStatus: e.target.value })}>
                     <option>Pending</option>
                     <option>Processing</option>
@@ -441,6 +445,16 @@ export default function App() {
           <div style={styles.paymentChip}><PaymentLogo type="Zelle" /> <span>ZELLE: {branding.zelle}</span></div>
           <div style={styles.paymentChip}><PaymentLogo type="PayPal" /> <span>PAYPAL: {branding.paypal}</span></div>
         </div>
+        <div style={styles.manualCheckoutPanel}>
+          <div style={styles.manualCheckoutTitle}>Manual Checkout</div>
+          <div style={styles.manualCheckoutText}>Send payment by Zelle or PayPal, then email your order details and payment proof for review. Orders are manually reviewed before approval and shipping.</div>
+          <div style={styles.manualCheckoutSteps}>
+            <div style={styles.stepCard}><div style={styles.stepNumber}>1</div><div>Select your peptide and total amount</div></div>
+            <div style={styles.stepCard}><div style={styles.stepNumber}>2</div><div>Send payment through Zelle or PayPal</div></div>
+            <div style={styles.stepCard}><div style={styles.stepNumber}>3</div><div>Upload or email payment proof for confirmation</div></div>
+            <div style={styles.stepCard}><div style={styles.stepNumber}>4</div><div>Order moves through review, confirmation, and shipping updates</div></div>
+          </div>
+        </div>
       </section>
 
       <section id="legal" style={styles.legalSection}>
@@ -462,6 +476,10 @@ export default function App() {
             <div style={styles.legalText}>All sales are final. No refunds or returns. Products are not intended for human consumption. Customer is responsible for ensuring compliance with all applicable local, state, and federal laws before purchase.</div>
           </div>
         </div>
+      </section>
+
+      <section style={styles.researchAgreementBar}>
+        <div style={styles.researchAgreementText}>All products sold by Level Peptides are intended strictly for research purposes only.</div>
       </section>
 
       <footer style={styles.footer}>100% RESEARCH GRADE <span style={styles.dot}>•</span> VERIFIED QUALITY <span style={styles.dot}>•</span> TRUSTED BY RESEARCHERS</footer>
@@ -582,6 +600,14 @@ const styles = {
   paymentTitle: { fontSize: 26, marginBottom: 16, fontWeight: 700 },
   paymentRow: { display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' },
   paymentChip: { padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.03)', fontSize: 16, display: 'flex', alignItems: 'center', gap: 10 },
+  manualCheckoutPanel: { marginTop: 22, background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 18, padding: 20, maxWidth: 980, marginInline: 'auto' },
+  manualCheckoutTitle: { fontSize: 22, fontWeight: 800, marginBottom: 10 },
+  manualCheckoutText: { color: '#d0d0d0', fontSize: 14, lineHeight: 1.6, marginBottom: 16 },
+  manualCheckoutSteps: { display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 12 },
+  stepCard: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: 14, fontSize: 14, lineHeight: 1.5 },
+  stepNumber: { width: 28, height: 28, borderRadius: '50%', background: '#ff1733', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, marginBottom: 10 },
+  researchAgreementBar: { padding: '20px 34px 10px', textAlign: 'center' },
+  researchAgreementText: { maxWidth: 980, margin: '0 auto', padding: '16px 18px', borderRadius: 14, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.03)', color: '#f0f0f0', fontSize: 16, fontWeight: 700 },
   payLogo: { width: 30, height: 30, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', flexShrink: 0 },
   legalSection: { padding: '18px 34px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)' },
   legalGrid: { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 18 },
@@ -596,5 +622,6 @@ const styles = {
   modalButtons: { display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 14 },
   footer: { textAlign: 'center', padding: '24px 20px 44px', color: '#f0f0f0', fontSize: 22 },
 }
+
 
 
