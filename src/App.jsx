@@ -50,7 +50,13 @@ function HeroVial() {
             <div style={styles.productNameLarge}>RETATRUTIDE</div>
             <div style={styles.mgLarge}>10mg</div>
             <div style={styles.purityBand}>99% PURITY</div>
-            <div style={styles.disclaimerLarge}>FOR RESEARCH<br />PURPOSES ONLY<br /><span style={styles.disclaimerSmall}>NOT FOR HUMAN CONSUMPTION</span></div>
+            <div style={styles.disclaimerLarge}>
+              FOR RESEARCH
+              <br />
+              PURPOSES ONLY
+              <br />
+              <span style={styles.disclaimerSmall}>NOT FOR HUMAN CONSUMPTION</span>
+            </div>
             <div style={styles.verifiedBand}>LEVEL VERIFIED</div>
           </div>
         </div>
@@ -118,11 +124,24 @@ export default function App() {
               <div style={styles.modalEyebrow}>AGE VERIFICATION</div>
               <h2 style={styles.modalTitle}>You must be 21+ to enter this site.</h2>
               <p style={styles.modalText}>
-                By entering, you confirm that you are at least 21 years old and that you understand all products are offered strictly for laboratory research purposes only.
+                By entering, you confirm that you are at least 21 years old and that you
+                understand all products are offered strictly for laboratory research purposes only.
               </p>
               <div style={styles.modalButtons}>
-                <button style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 180 }} onClick={() => setAgeVerified(true)}>I AM 21+</button>
-                <button style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }} onClick={() => window.location.href = 'https://www.google.com'}>EXIT SITE</button>
+                <button
+                  style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 180 }}
+                  onClick={() => setAgeVerified(true)}
+                >
+                  I AM 21+
+                </button>
+                <button
+                  style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }}
+                  onClick={() => {
+                    window.location.href = 'https://www.google.com'
+                  }}
+                >
+                  EXIT SITE
+                </button>
               </div>
             </div>
           ) : (
@@ -130,19 +149,38 @@ export default function App() {
               <div style={styles.modalEyebrow}>RESEARCH AGREEMENT</div>
               <h2 style={styles.modalTitle}>Assumption of Risk & Liability Waiver</h2>
               <p style={styles.modalText}>
-                By continuing, you acknowledge that all materials are sold solely for lawful laboratory and research use, not for human consumption, medical use, food use, cosmetic use, or household use. You assume all risk for handling, storage, use, and misuse of products purchased from this site.
+                By continuing, you acknowledge that all materials are sold solely for lawful
+                laboratory and research use, not for human consumption, medical use, food use,
+                cosmetic use, or household use. You assume all risk for handling, storage, use,
+                and misuse of products purchased from this site.
               </p>
               <p style={styles.modalText}>
-                You agree to release, indemnify, and hold harmless Level Peptides, its owners, affiliates, employees, and agents from any and all claims, losses, liabilities, damages, injuries, costs, or expenses arising from purchase, possession, transport, handling, or use of any product.
+                You agree to release, indemnify, and hold harmless Level Peptides, its owners,
+                affiliates, employees, and agents from any and all claims, losses, liabilities,
+                damages, injuries, costs, or expenses arising from purchase, possession, transport,
+                handling, or use of any product.
               </p>
               <div style={styles.modalButtons}>
-                <button style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 220 }} onClick={() => setRiskAccepted(true)}>I AGREE & ENTER</button>
-                <button style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }} onClick={() => window.location.href = 'https://www.google.com'}>DECLINE</button>
+                <button
+                  style={{ ...styles.ctaButton, ...styles.primaryCta, minWidth: 220 }}
+                  onClick={() => setRiskAccepted(true)}
+                >
+                  I AGREE & ENTER
+                </button>
+                <button
+                  style={{ ...styles.ctaButton, ...styles.secondaryCta, minWidth: 180 }}
+                  onClick={() => {
+                    window.location.href = 'https://www.google.com'
+                  }}
+                >
+                  DECLINE
+                </button>
               </div>
             </div>
           )}
         </div>
-      )
+      )}
+
       <div style={styles.pageGlowTop} />
       <div style={styles.pageGlowBottom} />
 
@@ -152,13 +190,23 @@ export default function App() {
         <div style={styles.heroOverlay} />
 
         <div style={styles.heroTextBlock}>
-          <h1 style={styles.heroTitle}>PREMIUM RESEARCH<br />PEPTIDES</h1>
-          <div style={styles.heroBulletLine}>ADVANCED FORMULAS <span style={styles.dot}>•</span> VERIFIED PURITY</div>
+          <h1 style={styles.heroTitle}>
+            PREMIUM RESEARCH
+            <br />
+            PEPTIDES
+          </h1>
+          <div style={styles.heroBulletLine}>
+            ADVANCED FORMULAS <span style={styles.dot}>•</span> VERIFIED PURITY
+          </div>
           <div style={styles.heroBulletLine}>FAST SHIPPING</div>
 
           <div style={styles.heroButtons}>
-            <a href="#shop" style={{ ...styles.ctaButton, ...styles.primaryCta }}>SHOP PEPTIDES</a>
-            <a href="#about" style={{ ...styles.ctaButton, ...styles.secondaryCta }}>LEARN MORE</a>
+            <a href="#shop" style={{ ...styles.ctaButton, ...styles.primaryCta }}>
+              SHOP PEPTIDES
+            </a>
+            <a href="#about" style={{ ...styles.ctaButton, ...styles.secondaryCta }}>
+              LEARN MORE
+            </a>
           </div>
         </div>
 
@@ -195,25 +243,45 @@ export default function App() {
         <div style={styles.legalGrid}>
           <div style={styles.legalCard}>
             <div style={styles.legalTitle}>Legal Notice</div>
-            <div style={styles.legalText}>All products and content on this site are provided exclusively for laboratory research purposes. Nothing on this website constitutes medical advice, diagnosis, treatment guidance, or a recommendation for human or veterinary use.</div>
+            <div style={styles.legalText}>
+              All products and content on this site are provided exclusively for laboratory research
+              purposes. Nothing on this website constitutes medical advice, diagnosis, treatment
+              guidance, or a recommendation for human or veterinary use.
+            </div>
           </div>
+
           <div style={styles.legalCard}>
             <div style={styles.legalTitle}>Assumption of Risk</div>
-            <div style={styles.legalText}>By purchasing, possessing, or using any item from this site, the buyer accepts full responsibility for verifying legality, suitability, safe handling, storage, transport, and use within their jurisdiction and facility.</div>
+            <div style={styles.legalText}>
+              By purchasing, possessing, or using any item from this site, the buyer accepts full
+              responsibility for verifying legality, suitability, safe handling, storage, transport,
+              and use within their jurisdiction and facility.
+            </div>
           </div>
+
           <div style={styles.legalCard}>
             <div style={styles.legalTitle}>Liability Waiver</div>
-            <div style={styles.legalText}>Buyer agrees to release and hold harmless Level Peptides and its affiliates from any claims or damages resulting from misuse, improper handling, relabeling, resale, unauthorized application, or any use inconsistent with research-only restrictions.</div>
+            <div style={styles.legalText}>
+              Buyer agrees to release and hold harmless Level Peptides and its affiliates from any
+              claims or damages resulting from misuse, improper handling, relabeling, resale,
+              unauthorized application, or any use inconsistent with research-only restrictions.
+            </div>
           </div>
+
           <div style={styles.legalCard}>
             <div style={styles.legalTitle}>Additional Notice</div>
-            <div style={styles.legalText}>All sales are final. No refunds or returns. Products are not intended for human consumption. Customer is responsible for ensuring compliance with all applicable local, state, and federal laws before purchase.</div>
+            <div style={styles.legalText}>
+              All sales are final. No refunds or returns. Products are not intended for human
+              consumption. Customer is responsible for ensuring compliance with all applicable local,
+              state, and federal laws before purchase.
+            </div>
           </div>
         </div>
       </section>
 
       <footer style={styles.footer}>
-        100% RESEARCH GRADE <span style={styles.dot}>•</span> VERIFIED QUALITY <span style={styles.dot}>•</span> TRUSTED BY RESEARCHERS
+        100% RESEARCH GRADE <span style={styles.dot}>•</span> VERIFIED QUALITY{' '}
+        <span style={styles.dot}>•</span> TRUSTED BY RESEARCHERS
       </footer>
     </div>
   )
@@ -222,7 +290,8 @@ export default function App() {
 const styles = {
   page: {
     minHeight: '100vh',
-    background: 'radial-gradient(circle at 65% 20%, rgba(255,0,0,0.18), transparent 30%), linear-gradient(180deg, #080808 0%, #000 30%, #050505 100%)',
+    background:
+      'radial-gradient(circle at 65% 20%, rgba(255,0,0,0.18), transparent 30%), linear-gradient(180deg, #080808 0%, #000 30%, #050505 100%)',
     color: '#fff',
     fontFamily: 'Arial, Helvetica, sans-serif',
     position: 'relative',
@@ -284,7 +353,8 @@ const styles = {
   heroOverlay: {
     position: 'absolute',
     inset: 0,
-    background: 'radial-gradient(circle at 78% 45%, rgba(255,40,0,0.28), transparent 20%), radial-gradient(circle at 82% 52%, rgba(255,0,0,0.18), transparent 34%)',
+    background:
+      'radial-gradient(circle at 78% 45%, rgba(255,40,0,0.28), transparent 20%), radial-gradient(circle at 82% 52%, rgba(255,0,0,0.18), transparent 34%)',
     pointerEvents: 'none',
   },
   heroTextBlock: { position: 'relative', zIndex: 2, maxWidth: 620 },
@@ -302,6 +372,7 @@ const styles = {
     fontWeight: 800,
     letterSpacing: 0.4,
     border: '1px solid rgba(255,255,255,0.18)',
+    cursor: 'pointer',
   },
   primaryCta: { background: '#ff1130', color: '#fff', boxShadow: '0 0 24px rgba(255,17,48,0.28)' },
   secondaryCta: { background: 'rgba(10,10,10,0.7)', color: '#fff' },
@@ -343,8 +414,21 @@ const styles = {
     boxShadow: '0 0 30px rgba(255,0,0,0.2)',
   },
   heroVial: { width: 310, display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' },
-  capTop: { width: 220, height: 46, borderRadius: 20, background: 'linear-gradient(180deg, #ff2b18, #b80000)', boxShadow: '0 0 22px rgba(255,0,0,0.34)' },
-  capBottom: { width: 196, height: 18, background: '#111', borderBottomLeftRadius: 14, borderBottomRightRadius: 14, marginTop: -2 },
+  capTop: {
+    width: 220,
+    height: 46,
+    borderRadius: 20,
+    background: 'linear-gradient(180deg, #ff2b18, #b80000)',
+    boxShadow: '0 0 22px rgba(255,0,0,0.34)',
+  },
+  capBottom: {
+    width: 196,
+    height: 18,
+    background: '#111',
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 14,
+    marginTop: -2,
+  },
   glassLarge: {
     width: 180,
     height: 390,
@@ -363,13 +447,37 @@ const styles = {
   redLine: { height: 2, background: '#ff1733', borderRadius: 999, margin: '12px 10px 14px' },
   productNameLarge: { fontWeight: 800, fontSize: 26, lineHeight: 1.05 },
   mgLarge: { color: '#ff1733', fontWeight: 800, fontSize: 28, marginTop: 8 },
-  purityBand: { marginTop: 14, padding: '6px 0', fontSize: 12, color: '#111', background: 'linear-gradient(90deg, #d7d7d7, #f3f3f3, #cacaca)', fontWeight: 800 },
+  purityBand: {
+    marginTop: 14,
+    padding: '6px 0',
+    fontSize: 12,
+    color: '#111',
+    background: 'linear-gradient(90deg, #d7d7d7, #f3f3f3, #cacaca)',
+    fontWeight: 800,
+  },
   disclaimerLarge: { fontSize: 10, lineHeight: 1.35, marginTop: 12, color: '#efefef', fontWeight: 700 },
   disclaimerSmall: { fontSize: 9 },
-  verifiedBand: { marginTop: 12, padding: '7px 0', fontSize: 11, background: 'linear-gradient(90deg, #c8c8c8, #efefef, #c8c8c8)', color: '#111', fontWeight: 800 },
-  featuredSection: { padding: '36px 34px 24px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  verifiedBand: {
+    marginTop: 12,
+    padding: '7px 0',
+    fontSize: 11,
+    background: 'linear-gradient(90deg, #c8c8c8, #efefef, #c8c8c8)',
+    color: '#111',
+    fontWeight: 800,
+  },
+  featuredSection: {
+    padding: '36px 34px 24px',
+    textAlign: 'center',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
+  },
   sectionTitle: { fontSize: 30, letterSpacing: 1, margin: 0, fontWeight: 500 },
-  sectionUnderline: { width: 360, maxWidth: '85%', height: 3, margin: '14px auto 30px', background: 'linear-gradient(90deg, transparent, #ff1531, transparent)' },
+  sectionUnderline: {
+    width: 360,
+    maxWidth: '85%',
+    height: 3,
+    margin: '14px auto 30px',
+    background: 'linear-gradient(90deg, transparent, #ff1531, transparent)',
+  },
   productsGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 },
   productCard: {
     position: 'relative',
@@ -388,7 +496,14 @@ const styles = {
   },
   smallVialWrap: { display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: 1 },
   smallCapTop: { width: 94, height: 22, borderRadius: 12, background: 'linear-gradient(180deg, #ff2a18, #bb0000)' },
-  smallCapBottom: { width: 84, height: 9, background: '#101010', borderBottomLeftRadius: 8, borderBottomRightRadius: 8, marginTop: -1 },
+  smallCapBottom: {
+    width: 84,
+    height: 9,
+    background: '#101010',
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    marginTop: -1,
+  },
   smallGlass: {
     width: 86,
     height: 150,
@@ -434,17 +549,49 @@ const styles = {
   },
   badgeTitle: { fontSize: 16, fontWeight: 700 },
   badgeSubtitle: { fontSize: 16, lineHeight: 1.2, marginTop: 2 },
-  paymentSection: { padding: '22px 34px 28px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  paymentSection: {
+    padding: '22px 34px 28px',
+    textAlign: 'center',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
+  },
   paymentTitle: { fontSize: 26, marginBottom: 16, fontWeight: 700 },
   paymentRow: { display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' },
-  paymentChip: { padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.03)', fontSize: 16 },
+  paymentChip: {
+    padding: '14px 18px',
+    borderRadius: 12,
+    border: '1px solid rgba(255,255,255,0.15)',
+    background: 'rgba(255,255,255,0.03)',
+    fontSize: 16,
+  },
   legalSection: { padding: '18px 34px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)' },
   legalGrid: { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 18 },
-  legalCard: { background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 18, padding: 20 },
+  legalCard: {
+    background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+    border: '1px solid rgba(255,255,255,0.12)',
+    borderRadius: 18,
+    padding: 20,
+  },
   legalTitle: { fontSize: 20, fontWeight: 800, marginBottom: 10 },
   legalText: { color: '#d0d0d0', fontSize: 14, lineHeight: 1.6 },
-  modalOverlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.82)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, zIndex: 100 },
-  modalCard: { width: 'min(760px, 100%)', background: 'linear-gradient(180deg, #0d0d0d, #050505)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 24, padding: 28, boxShadow: '0 0 40px rgba(255,0,0,0.16)' },
+  modalOverlay: {
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(0,0,0,0.82)',
+    backdropFilter: 'blur(6px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    zIndex: 100,
+  },
+  modalCard: {
+    width: 'min(760px, 100%)',
+    background: 'linear-gradient(180deg, #0d0d0d, #050505)',
+    border: '1px solid rgba(255,255,255,0.12)',
+    borderRadius: 24,
+    padding: 28,
+    boxShadow: '0 0 40px rgba(255,0,0,0.16)',
+  },
   modalEyebrow: { color: '#ff1733', fontWeight: 800, fontSize: 12, letterSpacing: 1.2, marginBottom: 10 },
   modalTitle: { fontSize: 34, margin: '0 0 14px', fontWeight: 800 },
   modalText: { color: '#d8d8d8', lineHeight: 1.7, fontSize: 16, margin: '0 0 14px' },
