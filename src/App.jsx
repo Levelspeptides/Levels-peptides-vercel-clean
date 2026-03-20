@@ -1,56 +1,105 @@
 import React from 'react'
 
-const products = [
-  { name: 'Retatrutide', mg: '10mg', price: '$299' },
-  { name: 'Retatrutide', mg: '20mg', price: '$399' },
-  { name: 'Tirzepatide', mg: '10mg', price: '$249' },
-  { name: 'Tirzepatide', mg: '20mg', price: '$349' },
-  { name: 'Tesamorelin', mg: '10mg', price: '$179' },
-  { name: 'NAD+', mg: '500mg', price: '$129' },
-  { name: 'BPC-157', mg: '10mg', price: '$99' },
-  { name: 'TB-500', mg: '10mg', price: '$149' },
-  { name: 'MOTS-C', mg: '10mg', price: '$149' },
-  { name: 'GHK-CU', mg: '100mg', price: '$169' },
-  { name: 'SEMAX', mg: '10mg', price: '$119' },
+const featuredProducts = [
+  { name: 'RETATRUTIDE', mg: '10mg', price: '$119' },
+  { name: 'TIRZEPATIDE', mg: '10mg', price: '$99' },
+  { name: 'TESAMORELIN', mg: '10mg', price: '$89' },
+  { name: 'NAD+', mg: '200mg', price: '$99' },
 ]
 
-function VialCard({ name, mg, price }) {
+function Header() {
   return (
-    <div style={styles.card}>
-      <div style={styles.vialWrap}>
+    <header style={styles.header}>
+      <div style={styles.logoWrap}>
+        <div style={styles.logoMain}>LEVEL</div>
+        <div style={styles.logoSub}>PEPTIDES</div>
+      </div>
+
+      <nav style={styles.nav}>
+        <a href="#" style={{ ...styles.navLink, ...styles.navLinkActive }}>HOME</a>
+        <a href="#shop" style={styles.navLink}>SHOP</a>
+        <a href="#peptides" style={styles.navLink}>PEPTIDES</a>
+        <a href="#guides" style={styles.navLink}>RESEARCH GUIDES</a>
+        <a href="#about" style={styles.navLink}>ABOUT US</a>
+      </nav>
+
+      <div style={styles.headerIcons}>
+        <span style={styles.icon}>⌕</span>
+        <span style={styles.icon}>◯</span>
+        <span style={styles.icon}>🛒</span>
+      </div>
+    </header>
+  )
+}
+
+function HeroVial() {
+  return (
+    <div style={styles.heroVialWrap}>
+      <div style={styles.heroMoleculeA} />
+      <div style={styles.heroMoleculeB} />
+      <div style={styles.heroPedestal} />
+
+      <div style={styles.heroVial}>
         <div style={styles.capTop} />
         <div style={styles.capBottom} />
-        <div style={styles.glass}>
-          <div style={styles.label}>
-            <div style={styles.brand}>LEVEL<br />PEPTIDES</div>
+        <div style={styles.glassLarge}>
+          <div style={styles.labelLarge}>
+            <div style={styles.brandLarge}>LEVEL</div>
+            <div style={styles.brandSubLarge}>PEPTIDES</div>
             <div style={styles.redLine} />
-            <div style={styles.productName}>{name}</div>
-            <div style={styles.mg}>{mg}</div>
-            <div style={styles.purity}>99% PURITY</div>
-            <div style={styles.disclaimer}>FOR RESEARCH PURPOSES ONLY<br />NOT FOR HUMAN CONSUMPTION</div>
-            <div style={styles.verified}>LEVEL VERIFIED</div>
+            <div style={styles.productNameLarge}>RETATRUTIDE</div>
+            <div style={styles.mgLarge}>10mg</div>
+            <div style={styles.purityBand}>99% PURITY</div>
+            <div style={styles.disclaimerLarge}>FOR RESEARCH<br />PURPOSES ONLY<br /><span style={styles.disclaimerSmall}>NOT FOR HUMAN CONSUMPTION</span></div>
+            <div style={styles.verifiedBand}>LEVEL VERIFIED</div>
           </div>
         </div>
       </div>
-      <div style={styles.cardInfo}>
-        <div>
-          <div style={styles.cardTitle}>{name}</div>
-          <div style={styles.cardSubtitle}>{mg} vial</div>
-        </div>
-        <div style={styles.price}>{price}</div>
-      </div>
-      <button style={styles.button}>Order Now</button>
     </div>
   )
 }
 
-function PaymentChip({ title, value }) {
+function ProductVial({ name, mg }) {
   return (
-    <div style={styles.paymentChip}>
-      <div style={styles.paymentIcon}>$</div>
+    <div style={styles.smallVialWrap}>
+      <div style={styles.smallCapTop} />
+      <div style={styles.smallCapBottom} />
+      <div style={styles.smallGlass}>
+        <div style={styles.smallLabel}>
+          <div style={styles.smallBrand}>LEVEL</div>
+          <div style={styles.smallBrandSub}>PEPTIDES</div>
+          <div style={styles.redLineSmall} />
+          <div style={styles.smallName}>{name}</div>
+          <div style={styles.smallMg}>{mg}</div>
+          <div style={styles.smallPurityBand}>99% PURITY</div>
+          <div style={styles.smallDisclaimer}>RESEARCH USE ONLY</div>
+          <div style={styles.smallVerified}>LEVEL VERIFIED</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ProductCard({ name, mg, price }) {
+  return (
+    <div style={styles.productCard}>
+      <div style={styles.productCardGlow} />
+      <ProductVial name={name} mg={mg} />
+      <div style={styles.productTitle}>{name}</div>
+      <div style={styles.productMg}>{mg}</div>
+      <div style={styles.stars}>★★★★★</div>
+      <div style={styles.productPrice}>{price}</div>
+    </div>
+  )
+}
+
+function FeatureBadge({ icon, title, subtitle }) {
+  return (
+    <div style={styles.badgeItem}>
+      <div style={styles.badgeIcon}>{icon}</div>
       <div>
-        <div style={styles.paymentTitle}>{title}</div>
-        <div style={styles.paymentValue}>{value}</div>
+        <div style={styles.badgeTitle}>{title}</div>
+        <div style={styles.badgeSubtitle}>{subtitle}</div>
       </div>
     </div>
   )
@@ -59,117 +108,57 @@ function PaymentChip({ title, value }) {
 export default function App() {
   return (
     <div style={styles.page}>
-      <div style={styles.backgroundGlowOne} />
-      <div style={styles.backgroundGlowTwo} />
+      <div style={styles.pageGlowTop} />
+      <div style={styles.pageGlowBottom} />
 
-      <header style={styles.header}>
-        <div style={styles.logoBlock}>
-          <div style={styles.logoMark}>L</div>
-          <div>
-            <div style={styles.logoText}>LEVEL PEPTIDES</div>
-            <div style={styles.logoSub}>Premium Research Peptides</div>
-          </div>
-        </div>
-        <nav style={styles.nav}>
-          <a href="#shop" style={styles.navLink}>Shop</a>
-          <a href="#payments" style={styles.navLink}>Payments</a>
-          <a href="#policies" style={styles.navLink}>Policies</a>
-          <a href="#contact" style={styles.navLink}>Contact</a>
-        </nav>
-      </header>
+      <Header />
 
-      <section style={styles.hero}>
-        <div style={styles.heroTextWrap}>
-          <div style={styles.badge}>RESEARCH USE ONLY</div>
-          <h1 style={styles.heroTitle}>Premium peptide vials with the dark luxury style you wanted.</h1>
-          <p style={styles.heroText}>
-            A clean storefront experience with premium vial-style product cards, manual checkout instructions,
-            and accepted payment methods clearly shown.
-          </p>
+      <section style={styles.heroSection}>
+        <div style={styles.heroOverlay} />
+
+        <div style={styles.heroTextBlock}>
+          <h1 style={styles.heroTitle}>PREMIUM RESEARCH<br />PEPTIDES</h1>
+          <div style={styles.heroBulletLine}>ADVANCED FORMULAS <span style={styles.dot}>•</span> VERIFIED PURITY</div>
+          <div style={styles.heroBulletLine}>FAST SHIPPING</div>
+
           <div style={styles.heroButtons}>
-            <a href="#shop" style={{ ...styles.button, ...styles.primaryButton, textDecoration: 'none' }}>Shop Peptides</a>
-            <a href="#payments" style={{ ...styles.button, ...styles.secondaryButton, textDecoration: 'none' }}>View Payments</a>
+            <a href="#shop" style={{ ...styles.ctaButton, ...styles.primaryCta }}>SHOP PEPTIDES</a>
+            <a href="#about" style={{ ...styles.ctaButton, ...styles.secondaryCta }}>LEARN MORE</a>
           </div>
         </div>
 
-        <div style={styles.heroFeature}>
-          <div style={styles.featureVialLarge}>
-            <div style={styles.capTop} />
-            <div style={styles.capBottom} />
-            <div style={styles.glassLarge}>
-              <div style={styles.labelLarge}>
-                <div style={styles.brandLarge}>LEVEL<br />PEPTIDES</div>
-                <div style={styles.redLine} />
-                <div style={styles.productNameLarge}>RETATRUTIDE</div>
-                <div style={styles.mgLarge}>10mg</div>
-                <div style={styles.purity}>99% PURITY</div>
-                <div style={styles.disclaimer}>FOR RESEARCH PURPOSES ONLY<br />NOT FOR HUMAN CONSUMPTION</div>
-                <div style={styles.verified}>LEVEL VERIFIED</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroVial />
       </section>
 
-      <section id="shop" style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <div>
-            <div style={styles.sectionEyebrow}>PRODUCTS</div>
-            <h2 style={styles.sectionTitle}>Featured Vials</h2>
-          </div>
-          <div style={styles.sectionNote}>Ferrari red accents • premium black finish • research disclaimer</div>
-        </div>
+      <section id="shop" style={styles.featuredSection}>
+        <h2 style={styles.sectionTitle}>FEATURED PEPTIDE PRODUCTS</h2>
+        <div style={styles.sectionUnderline} />
 
-        <div style={styles.grid}>
-          {products.map((product) => (
-            <VialCard key={`${product.name}-${product.mg}`} {...product} />
+        <div style={styles.productsGrid}>
+          {featuredProducts.map((product) => (
+            <ProductCard key={product.name} {...product} />
           ))}
         </div>
       </section>
 
-      <section id="payments" style={styles.section}>
-        <div style={styles.paymentsPanel}>
-          <div style={styles.sectionEyebrow}>PAYMENTS ACCEPTED</div>
-          <h2 style={styles.sectionTitle}>Manual Checkout</h2>
-          <p style={styles.paymentText}>
-            Send payment first, then email your order details and payment proof. Shipping can be added manually to the final invoice amount.
-          </p>
-          <div style={styles.paymentGrid}>
-            <PaymentChip title="Zelle" value="levels.peptides.ca@gmail.com" />
-            <PaymentChip title="PayPal" value="levels.peptides.ca@gmail.com" />
-          </div>
+      <section style={styles.badgesRow}>
+        <FeatureBadge icon="⇄" title="FAST SHIPPING" subtitle="2-5 DAYS" />
+        <FeatureBadge icon="⬡" title="LAB TESTED" subtitle="99% PURITY" />
+        <FeatureBadge icon="⬢" title="SECURE" subtitle="CHECKOUT" />
+        <FeatureBadge icon="🇺🇸" title="USA SELLER" subtitle="" />
+      </section>
+
+      <section style={styles.paymentSection}>
+        <div style={styles.paymentTitle}>PAYMENT OPTIONS</div>
+        <div style={styles.paymentRow}>
+          <div style={styles.paymentChip}>ZELLE: levels.peptides.ca@gmail.com</div>
+          <div style={styles.paymentChip}>PAYPAL: levels.peptides.ca@gmail.com</div>
         </div>
       </section>
 
-      <section id="policies" style={styles.section}>
-        <div style={styles.policyGrid}>
-          <div style={styles.policyCard}>
-            <div style={styles.policyTitle}>Research Use Disclaimer</div>
-            <div style={styles.policyText}>All products are sold strictly for laboratory research purposes only and are not for human consumption.</div>
-          </div>
-          <div style={styles.policyCard}>
-            <div style={styles.policyTitle}>All Sales Final</div>
-            <div style={styles.policyText}>No refunds, no returns, and no exchanges. All sales are final.</div>
-          </div>
-          <div style={styles.policyCard}>
-            <div style={styles.policyTitle}>Shipping Policy</div>
-            <div style={styles.policyText}>Orders typically ship in 5–7 business days once processed.</div>
-          </div>
-          <div style={styles.policyCard}>
-            <div style={styles.policyTitle}>No Medical Claims</div>
-            <div style={styles.policyText}>No statements on this website are intended to diagnose, treat, cure, or prevent any disease.</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" style={styles.section}>
-        <div style={styles.contactBox}>
-          <div style={styles.sectionEyebrow}>CONTACT</div>
-          <h2 style={styles.sectionTitle}>Level Peptides</h2>
-          <div style={styles.contactLine}>Email: levels.peptides.ca@gmail.com</div>
-          <div style={styles.contactLine}>Phone: 909-521-0085</div>
-        </div>
-      </section>
+      <footer style={styles.footer}>
+        100% RESEARCH GRADE <span style={styles.dot}>•</span> VERIFIED QUALITY <span style={styles.dot}>•</span> TRUSTED BY RESEARCHERS
+      </footer>
     </div>
   )
 }
@@ -177,257 +166,222 @@ export default function App() {
 const styles = {
   page: {
     minHeight: '100vh',
-    background: '#000',
+    background: 'radial-gradient(circle at 65% 20%, rgba(255,0,0,0.18), transparent 30%), linear-gradient(180deg, #080808 0%, #000 30%, #050505 100%)',
     color: '#fff',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Arial, Helvetica, sans-serif',
     position: 'relative',
-    overflow: 'hidden',
+    overflowX: 'hidden',
   },
-  backgroundGlowOne: {
-    position: 'fixed',
+  pageGlowTop: {
+    position: 'absolute',
     top: -120,
-    right: -120,
+    right: -80,
     width: 420,
     height: 420,
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(255,0,0,0.25), rgba(255,0,0,0))',
+    background: 'radial-gradient(circle, rgba(255,20,20,0.35), rgba(255,20,20,0))',
+    filter: 'blur(40px)',
     pointerEvents: 'none',
-    filter: 'blur(20px)',
   },
-  backgroundGlowTwo: {
-    position: 'fixed',
-    bottom: -180,
-    left: -100,
-    width: 500,
-    height: 500,
+  pageGlowBottom: {
+    position: 'absolute',
+    bottom: 40,
+    left: -120,
+    width: 420,
+    height: 420,
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(255,40,0,0.2), rgba(255,40,0,0))',
+    background: 'radial-gradient(circle, rgba(255,20,20,0.2), rgba(255,20,20,0))',
+    filter: 'blur(50px)',
     pointerEvents: 'none',
-    filter: 'blur(30px)',
   },
   header: {
-    maxWidth: 1200,
-    margin: '0 auto',
-    padding: '24px 24px 8px',
+    position: 'sticky',
+    top: 0,
+    zIndex: 20,
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: 16,
+    gap: 18,
+    padding: '18px 34px',
+    borderBottom: '1px solid rgba(255,255,255,0.12)',
+    background: 'rgba(0,0,0,0.82)',
+    backdropFilter: 'blur(6px)',
+  },
+  logoWrap: { minWidth: 200 },
+  logoMain: { fontSize: 42, fontWeight: 800, letterSpacing: 2, lineHeight: 0.9 },
+  logoSub: { fontSize: 24, letterSpacing: 1.5, lineHeight: 1, marginTop: 4 },
+  nav: { display: 'flex', gap: 34, flexWrap: 'wrap', justifyContent: 'center' },
+  navLink: { color: '#f2f2f2', textDecoration: 'none', fontSize: 16, fontWeight: 700 },
+  navLinkActive: { color: '#ff1330' },
+  headerIcons: { display: 'flex', gap: 16, fontSize: 28, alignItems: 'center' },
+  icon: { opacity: 0.95 },
+  heroSection: {
     position: 'relative',
-    zIndex: 2,
-  },
-  logoBlock: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 14,
-  },
-  logoMark: {
-    width: 46,
-    height: 46,
-    borderRadius: 14,
-    background: 'linear-gradient(135deg, #8b0000, #ff2a00)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: 800,
-    fontSize: 24,
-    boxShadow: '0 0 25px rgba(255,0,0,0.35)',
-  },
-  logoText: { fontWeight: 800, fontSize: 20, letterSpacing: 0.5 },
-  logoSub: { color: '#aaa', fontSize: 13 },
-  nav: { display: 'flex', gap: 18, flexWrap: 'wrap' },
-  navLink: { color: '#fff', textDecoration: 'none', fontSize: 14, opacity: 0.9 },
-  hero: {
-    maxWidth: 1200,
-    margin: '0 auto',
-    padding: '48px 24px 40px',
+    minHeight: 760,
     display: 'grid',
-    gridTemplateColumns: '1.1fr 0.9fr',
-    gap: 32,
+    gridTemplateColumns: '1.05fr 0.95fr',
+    gap: 10,
     alignItems: 'center',
+    padding: '48px 54px 36px',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'radial-gradient(circle at 78% 45%, rgba(255,40,0,0.28), transparent 20%), radial-gradient(circle at 82% 52%, rgba(255,0,0,0.18), transparent 34%)',
+    pointerEvents: 'none',
+  },
+  heroTextBlock: { position: 'relative', zIndex: 2, maxWidth: 620 },
+  heroTitle: { fontSize: 82, lineHeight: 0.95, margin: 0, fontWeight: 800, letterSpacing: -1 },
+  heroBulletLine: { color: '#f8f8f8', fontSize: 24, marginTop: 22, fontWeight: 500 },
+  dot: { color: '#ff1c2b', padding: '0 10px' },
+  heroButtons: { display: 'flex', gap: 24, flexWrap: 'wrap', marginTop: 40 },
+  ctaButton: {
+    textDecoration: 'none',
+    minWidth: 260,
+    textAlign: 'center',
+    padding: '20px 24px',
+    borderRadius: 14,
+    fontSize: 22,
+    fontWeight: 800,
+    letterSpacing: 0.4,
+    border: '1px solid rgba(255,255,255,0.18)',
+  },
+  primaryCta: { background: '#ff1130', color: '#fff', boxShadow: '0 0 24px rgba(255,17,48,0.28)' },
+  secondaryCta: { background: 'rgba(10,10,10,0.7)', color: '#fff' },
+  heroVialWrap: {
     position: 'relative',
+    height: 620,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     zIndex: 2,
   },
-  heroTextWrap: {
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 28,
-    padding: 32,
-    boxShadow: '0 0 40px rgba(255,0,0,0.1)',
+  heroMoleculeA: {
+    position: 'absolute',
+    top: 50,
+    right: 40,
+    width: 240,
+    height: 240,
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,0,0,0.18), rgba(255,255,255,0))',
+    filter: 'blur(18px)',
   },
-  badge: {
-    display: 'inline-block',
-    padding: '8px 14px',
+  heroMoleculeB: {
+    position: 'absolute',
+    right: 10,
+    bottom: 90,
+    width: 260,
+    height: 260,
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(255,255,255,0.08), rgba(255,0,0,0.22), rgba(255,255,255,0))',
+    filter: 'blur(20px)',
+  },
+  heroPedestal: {
+    position: 'absolute',
+    bottom: 36,
+    width: 380,
+    height: 56,
     borderRadius: 999,
-    background: 'rgba(255,40,0,0.14)',
-    color: '#ff6a4d',
-    fontSize: 12,
-    fontWeight: 700,
-    marginBottom: 18,
+    background: 'radial-gradient(circle at center, rgba(255,40,0,0.24), rgba(20,20,20,1) 65%)',
+    boxShadow: '0 0 30px rgba(255,0,0,0.2)',
   },
-  heroTitle: { fontSize: 52, lineHeight: 1.03, margin: '0 0 16px', fontWeight: 800 },
-  heroText: { color: '#c9c9c9', fontSize: 18, lineHeight: 1.6, margin: 0 },
-  heroButtons: { display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 28 },
-  button: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 16,
-    padding: '14px 22px',
-    fontWeight: 700,
-    border: 'none',
-    cursor: 'pointer',
-  },
-  primaryButton: { background: '#ff2a00', color: '#fff', boxShadow: '0 0 20px rgba(255,42,0,0.3)' },
-  secondaryButton: { background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' },
-  heroFeature: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 520,
-    background: 'radial-gradient(circle at center, rgba(255,0,0,0.22), rgba(255,0,0,0) 65%)',
-    borderRadius: 32,
-  },
-  featureVialLarge: {
-    width: 280,
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  capTop: {
-    width: '72%',
-    height: 34,
-    borderRadius: 18,
-    background: 'linear-gradient(180deg, #ff2a00, #b10000)',
-    boxShadow: '0 0 20px rgba(255,0,0,0.35)',
-  },
-  capBottom: {
-    width: '66%',
-    height: 16,
-    borderBottomLeftRadius: 14,
-    borderBottomRightRadius: 14,
-    background: '#121212',
-    marginTop: -3,
-  },
+  heroVial: { width: 310, display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' },
+  capTop: { width: 220, height: 46, borderRadius: 20, background: 'linear-gradient(180deg, #ff2b18, #b80000)', boxShadow: '0 0 22px rgba(255,0,0,0.34)' },
+  capBottom: { width: 196, height: 18, background: '#111', borderBottomLeftRadius: 14, borderBottomRightRadius: 14, marginTop: -2 },
   glassLarge: {
-    width: '58%',
-    height: 380,
-    borderRadius: 30,
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.05))',
-    border: '2px solid rgba(255,255,255,0.24)',
-    marginTop: -2,
+    width: 180,
+    height: 390,
+    borderRadius: 34,
+    background: 'linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03))',
+    border: '2px solid rgba(255,255,255,0.22)',
+    marginTop: -1,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: 18,
-    boxShadow: '0 20px 80px rgba(0,0,0,0.45)',
+    boxShadow: '0 14px 40px rgba(0,0,0,0.55)',
   },
-  labelLarge: {
-    width: '84%',
-    borderRadius: 18,
-    background: '#090909',
-    padding: '18px 14px',
-    textAlign: 'center',
-  },
-  brandLarge: { fontWeight: 800, fontSize: 24, lineHeight: 1.05 },
-  productNameLarge: { fontWeight: 800, fontSize: 26, marginTop: 14 },
-  mgLarge: { fontWeight: 800, fontSize: 24, marginTop: 8, color: '#ff3b12' },
-  section: { maxWidth: 1200, margin: '0 auto', padding: '18px 24px 46px', position: 'relative', zIndex: 2 },
-  sectionHeader: { display: 'flex', justifyContent: 'space-between', gap: 20, alignItems: 'end', marginBottom: 24, flexWrap: 'wrap' },
-  sectionEyebrow: { color: '#ff6a4d', fontWeight: 700, fontSize: 12, letterSpacing: 1 },
-  sectionTitle: { fontSize: 36, margin: '6px 0 0', fontWeight: 800 },
-  sectionNote: { color: '#aaa', fontSize: 14 },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: 22,
-  },
-  card: {
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 26,
-    padding: 22,
-    boxShadow: '0 0 26px rgba(255,0,0,0.07)',
-  },
-  vialWrap: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  glass: {
-    width: 132,
-    height: 230,
-    borderRadius: 24,
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04))',
-    border: '2px solid rgba(255,255,255,0.22)',
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: 10,
-  },
-  label: {
-    width: '84%',
-    background: '#090909',
-    borderRadius: 16,
-    padding: '12px 8px',
-    textAlign: 'center',
-  },
-  brand: { fontWeight: 800, fontSize: 14, lineHeight: 1.05 },
-  redLine: { height: 2, background: '#ff2a00', borderRadius: 999, margin: '10px 10px 10px' },
-  productName: { fontWeight: 800, fontSize: 16 },
-  mg: { fontWeight: 800, fontSize: 18, color: '#ff3b12', marginTop: 6 },
-  purity: { fontSize: 11, marginTop: 10, color: '#d6d6d6' },
-  disclaimer: { fontSize: 9, lineHeight: 1.4, color: '#c8c8c8', marginTop: 10 },
-  verified: { fontSize: 10, marginTop: 10, color: '#e5e5e5' },
-  cardInfo: { display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center', marginBottom: 14 },
-  cardTitle: { fontWeight: 800, fontSize: 19 },
-  cardSubtitle: { color: '#aaa', fontSize: 13, marginTop: 4 },
-  price: { color: '#ff6a4d', fontWeight: 800, fontSize: 22 },
-  paymentsPanel: {
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 28,
-    padding: 30,
-  },
-  paymentText: { color: '#c8c8c8', lineHeight: 1.7, maxWidth: 760 },
-  paymentGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginTop: 22 },
-  paymentChip: {
-    display: 'flex',
-    gap: 14,
-    alignItems: 'center',
-    background: '#0e0e0e',
-    border: '1px solid rgba(255,255,255,0.08)',
+  labelLarge: { width: 146, background: '#090909', borderRadius: 20, padding: '18px 10px 14px', textAlign: 'center' },
+  brandLarge: { fontWeight: 800, fontSize: 28, lineHeight: 0.95 },
+  brandSubLarge: { fontSize: 16, marginTop: 2, letterSpacing: 1 },
+  redLine: { height: 2, background: '#ff1733', borderRadius: 999, margin: '12px 10px 14px' },
+  productNameLarge: { fontWeight: 800, fontSize: 26, lineHeight: 1.05 },
+  mgLarge: { color: '#ff1733', fontWeight: 800, fontSize: 28, marginTop: 8 },
+  purityBand: { marginTop: 14, padding: '6px 0', fontSize: 12, color: '#111', background: 'linear-gradient(90deg, #d7d7d7, #f3f3f3, #cacaca)', fontWeight: 800 },
+  disclaimerLarge: { fontSize: 10, lineHeight: 1.35, marginTop: 12, color: '#efefef', fontWeight: 700 },
+  disclaimerSmall: { fontSize: 9 },
+  verifiedBand: { marginTop: 12, padding: '7px 0', fontSize: 11, background: 'linear-gradient(90deg, #c8c8c8, #efefef, #c8c8c8)', color: '#111', fontWeight: 800 },
+  featuredSection: { padding: '36px 34px 24px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  sectionTitle: { fontSize: 30, letterSpacing: 1, margin: 0, fontWeight: 500 },
+  sectionUnderline: { width: 360, maxWidth: '85%', height: 3, margin: '14px auto 30px', background: 'linear-gradient(90deg, transparent, #ff1531, transparent)' },
+  productsGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 18 },
+  productCard: {
+    position: 'relative',
+    background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
     borderRadius: 20,
-    padding: 18,
+    border: '1px solid rgba(255,255,255,0.12)',
+    padding: '18px 14px 20px',
+    overflow: 'hidden',
+    boxShadow: 'inset 0 0 40px rgba(255,0,0,0.06)',
   },
-  paymentIcon: {
-    width: 42,
-    height: 42,
-    borderRadius: 12,
-    background: 'linear-gradient(135deg, #8b0000, #ff2a00)',
+  productCardGlow: {
+    position: 'absolute',
+    inset: 0,
+    background: 'radial-gradient(circle at 50% 35%, rgba(255,25,25,0.18), rgba(255,25,25,0) 52%)',
+    pointerEvents: 'none',
+  },
+  smallVialWrap: { display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', zIndex: 1 },
+  smallCapTop: { width: 94, height: 22, borderRadius: 12, background: 'linear-gradient(180deg, #ff2a18, #bb0000)' },
+  smallCapBottom: { width: 84, height: 9, background: '#101010', borderBottomLeftRadius: 8, borderBottomRightRadius: 8, marginTop: -1 },
+  smallGlass: {
+    width: 86,
+    height: 150,
+    borderRadius: 18,
+    border: '1.5px solid rgba(255,255,255,0.18)',
+    background: 'linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02))',
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: 8,
+  },
+  smallLabel: { width: 70, background: '#090909', borderRadius: 10, padding: '6px 4px', textAlign: 'center' },
+  smallBrand: { fontWeight: 800, fontSize: 11, lineHeight: 0.95 },
+  smallBrandSub: { fontSize: 6.5, letterSpacing: 0.7 },
+  redLineSmall: { height: 1.5, background: '#ff1733', margin: '5px 6px 6px' },
+  smallName: { fontWeight: 800, fontSize: 7.5, lineHeight: 1 },
+  smallMg: { color: '#ff1733', fontWeight: 800, fontSize: 10, marginTop: 4 },
+  smallPurityBand: { fontSize: 5.7, background: '#f2f2f2', color: '#111', marginTop: 5, padding: '2px 0', fontWeight: 800 },
+  smallDisclaimer: { fontSize: 4.8, marginTop: 5, color: '#ddd', lineHeight: 1.2 },
+  smallVerified: { fontSize: 5.4, marginTop: 5, background: '#e6e6e6', color: '#111', padding: '2px 0', fontWeight: 800 },
+  productTitle: { marginTop: 16, fontSize: 18, fontWeight: 500, position: 'relative', zIndex: 1 },
+  productMg: { fontSize: 24, color: '#ff1733', marginTop: 6, fontWeight: 700, position: 'relative', zIndex: 1 },
+  stars: { color: '#ff1733', fontSize: 28, letterSpacing: 1, marginTop: 4, position: 'relative', zIndex: 1 },
+  productPrice: { fontSize: 28, fontWeight: 800, marginTop: 6, position: 'relative', zIndex: 1 },
+  badgesRow: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+    gap: 18,
+    padding: '28px 34px 20px',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
+  },
+  badgeItem: { display: 'flex', alignItems: 'center', gap: 14, justifyContent: 'center', minHeight: 72 },
+  badgeIcon: {
+    width: 56,
+    height: 56,
+    borderRadius: '50%',
+    border: '2px solid #ff1733',
+    color: '#ff1733',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontWeight: 800,
+    fontSize: 26,
+    flexShrink: 0,
   },
-  paymentTitle: { fontWeight: 700, fontSize: 16 },
-  paymentValue: { color: '#aaa', fontSize: 14, marginTop: 4 },
-  policyGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18 },
-  policyCard: {
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 22,
-    padding: 22,
-  },
-  policyTitle: { fontWeight: 800, fontSize: 20, marginBottom: 10 },
-  policyText: { color: '#bdbdbd', lineHeight: 1.65, fontSize: 14 },
-  contactBox: {
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015))',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 26,
-    padding: 28,
-    textAlign: 'center',
-  },
-  contactLine: { color: '#ddd', fontSize: 18, marginTop: 10 },
+  badgeTitle: { fontSize: 16, fontWeight: 700 },
+  badgeSubtitle: { fontSize: 16, lineHeight: 1.2, marginTop: 2 },
+  paymentSection: { padding: '22px 34px 28px', textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  paymentTitle: { fontSize: 26, marginBottom: 16, fontWeight: 700 },
+  paymentRow: { display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap' },
+  paymentChip: { padding: '14px 18px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.03)', fontSize: 16 },
+  footer: { textAlign: 'center', padding: '24px 20px 44px', color: '#f0f0f0', fontSize: 22 },
 }
+
